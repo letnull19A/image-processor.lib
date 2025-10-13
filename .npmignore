@@ -1,0 +1,50 @@
+# Source files
+src/
+examples/
+
+# Development files
+*.spec.ts
+*.test.ts
+vitest.config.ts
+tsconfig.json
+
+# Development dependencies
+node_modules/
+
+# Build artifacts (except dist)
+*.tsbuildinfo
+
+# Documentation development files
+task.md
+DPR_UPDATE_REPORT.md
+IMPLEMENTATION_REPORT.md
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage reports
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+tmp/
+temp/
