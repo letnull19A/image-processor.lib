@@ -1,36 +1,36 @@
 # Image Processor Library
 
-Библиотека для эффективной обработки изображений в браузере с поддержкой современных форматов (WebP, AVIF) и адаптивных размеров для мобильных устройств.
+A library for efficient image processing in the browser with support for modern formats (WebP, AVIF) and adaptive sizes for mobile devices.
 
-## Особенности
+## Features
 
-- ✅ Поддержка современных форматов изображений (WebP, AVIF)
-- ✅ Автоматическая генерация адаптивных размеров для `srcset`
-- ✅ **Поддержка DPR (Device Pixel Ratio)** для Retina дисплеев
-- ✅ Валидация загружаемых файлов
-- ✅ Собственные классы ошибок
-- ✅ Гибкая конфигурация размеров, форматов и DPR
-- ✅ Поддержка различных драйверов хранения
-- ✅ Полная типизация TypeScript
-- ✅ Unit тесты с Vitest
+- ✅ Support for modern image formats (WebP, AVIF)
+- ✅ Automatic generation of adaptive sizes for `srcset`
+- ✅ **DPR (Device Pixel Ratio) support** for Retina displays
+- ✅ File upload validation
+- ✅ Custom error classes
+- ✅ Flexible configuration of sizes, formats, and DPR
+- ✅ Support for various storage drivers
+- ✅ Full TypeScript typing
+- ✅ Unit tests with Vitest
 
-## Технологический стек
+## Tech Stack
 
-- **TypeScript** - типизация
-- **NestJS** - модульная архитектура
-- **Sharp** - обработка изображений
-- **Multer** - загрузка файлов
-- **UUID v7** - генерация уникальных имен файлов
+- **TypeScript** - typing
+- **NestJS** - modular architecture
+- **Sharp** - image processing
+- **Multer** - file uploads
+- **UUID v7** - unique filename generation
 
-## Установка
+## Installation
 
 ```bash
 npm install image-processor-lib
 ```
 
-## Быстрый старт
+## Quick Start
 
-### 1. Создайте драйвер хранения
+### 1. Create a storage driver
 
 ```typescript
 import { StorageDriver } from 'image-processor-lib';
@@ -59,7 +59,7 @@ export class LocalStorageDriver implements StorageDriver {
 }
 ```
 
-### 2. Настройте модуль
+### 2. Configure the module
 
 ```typescript
 import { Module } from '@nestjs/common';
@@ -87,7 +87,7 @@ import { LocalStorageDriver } from './local-storage.driver';
 export class AppModule {}
 ```
 
-### 3. Используйте в сервисе
+### 3. Use in service
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -106,7 +106,7 @@ export class ImageService {
     );
 
     return result;
-    // Результат с поддержкой DPR:
+    // Result with DPR support:
     // {
     //   "original": "/uploads/originals/pic.jpg",
     //   "generated": {
@@ -142,31 +142,31 @@ export class ImageService {
 
 ### ImagePipelineService
 
-Основной сервис для обработки изображений.
+Main service for image processing.
 
 #### `processImage(buffer, filename, mimeType?, maxSize?)`
 
-Обрабатывает изображение и создает адаптивные версии.
+Processes an image and creates adaptive versions.
 
-**Параметры:**
-- `buffer: Buffer` - буфер изображения
-- `filename: string` - имя файла
-- `mimeType?: string` - MIME тип (опционально)
-- `maxSize?: number` - максимальный размер в байтах (опционально)
+**Parameters:**
+- `buffer: Buffer` - image buffer
+- `filename: string` - filename
+- `mimeType?: string` - MIME type (optional)
+- `maxSize?: number` - maximum size in bytes (optional)
 
-**Возвращает:** `Promise<ImageProcessingResult>`
+**Returns:** `Promise<ImageProcessingResult>`
 
 #### `deleteImage(path)`
 
-Удаляет изображение из хранилища.
+Deletes an image from storage.
 
 #### `getImage(path)`
 
-Получает изображение из хранилища.
+Gets an image from storage.
 
 ### ImageProcessingConfig
 
-Класс для настройки обработки изображений.
+Class for configuring image processing.
 
 ```typescript
 const config = new ImageProcessingConfig()
@@ -185,24 +185,24 @@ const config = new ImageProcessingConfig()
 
 ### DPR (Device Pixel Ratio) Support
 
-Библиотека поддерживает создание изображений для различных плотностей пикселей:
+The library supports creating images for different pixel densities:
 
-- **1x** - стандартные дисплеи
-- **2x** - Retina дисплеи (iPhone, MacBook)
-- **3x** - Super Retina дисплеи (iPhone Pro)
+- **1x** - standard displays
+- **2x** - Retina displays (iPhone, MacBook)
+- **3x** - Super Retina displays (iPhone Pro)
 
-Это позволяет создавать четкие изображения для всех типов устройств:
+This allows creating crisp images for all device types:
 
 ```typescript
-// Для размера 320px с DPR поддержкой создаются:
+// For 320px size with DPR support, the following are created:
 // - pic_320w@1x.webp (320px)
 // - pic_320w@2x.webp (640px) 
 // - pic_320w@3x.webp (960px)
 ```
 
-### Поддерживаемые форматы
+### Supported Formats
 
-**Входные форматы:**
+**Input formats:**
 - JPEG/JPG
 - PNG
 - WebP
@@ -212,15 +212,15 @@ const config = new ImageProcessingConfig()
 - TIFF
 - SVG
 
-**Выходные форматы:**
+**Output formats:**
 - WebP
 - AVIF
 - JPEG
 - PNG
 
-## Обработка ошибок
+## Error Handling
 
-Библиотека предоставляет специализированные классы ошибок:
+The library provides specialized error classes:
 
 ```typescript
 import {
@@ -235,45 +235,45 @@ try {
   await imagePipeline.processImage(buffer, filename);
 } catch (error) {
   if (error instanceof UnsupportedImageFormatError) {
-    // Обработка неподдерживаемого формата
+    // Handle unsupported format
   } else if (error instanceof ImageValidationError) {
-    // Ошибка валидации
+    // Validation error
   } else if (error instanceof StorageError) {
-    // Ошибка хранилища
+    // Storage error
   }
 }
 ```
 
-## Тестирование
+## Testing
 
 ```bash
 npm test
 npm run test:coverage
 ```
 
-## Документация
+## Documentation
 
-📚 **[Полная документация](./docs/README.md)** - Все материалы в одном месте
+📚 **[Complete Documentation](./docs/README.md)** - All materials in one place
 
-### Основные документы:
-- [**Руководство по использованию**](./docs/USAGE_GUIDE.md) - Полное руководство с примерами кода
-- [**API Reference**](./docs/API_REFERENCE.md) - Документация всех интерфейсов и методов
-- [**Примеры использования**](./docs/examples/) - Практические примеры интеграции
+### Main documents:
+- [**Usage Guide**](./docs/USAGE_GUIDE.md) - Complete guide with code examples
+- [**API Reference**](./docs/API_REFERENCE.md) - Documentation of all interfaces and methods
+- [**Usage Examples**](./docs/examples/) - Practical integration examples
 
-### Основные разделы документации:
+### Main documentation sections:
 
-- 🚀 **Быстрый старт** - Настройка за 5 минут
-- ⚙️ **Конфигурация** - Гибкие настройки размеров, форматов и DPR
-- 🔧 **Storage Drivers** - AWS S3, Cloudinary, локальное хранилище
-- 📱 **DPR поддержка** - Retina дисплеи и адаптивные изображения
-- 🛠️ **Интеграция** - NestJS, GraphQL, Bull Queue, Redis
-- 🎯 **Лучшие практики** - Оптимизация производительности
-- ❌ **Обработка ошибок** - Специализированные классы ошибок
+- 🚀 **Quick Start** - Setup in 5 minutes
+- ⚙️ **Configuration** - Flexible settings for sizes, formats, and DPR
+- 🔧 **Storage Drivers** - AWS S3, Cloudinary, local storage
+- 📱 **DPR Support** - Retina displays and adaptive images
+- 🛠️ **Integration** - NestJS, GraphQL, Bull Queue, Redis
+- 🎯 **Best Practices** - Performance optimization
+- ❌ **Error Handling** - Specialized error classes
 
-### Примеры кода:
+### Code examples:
 
 ```typescript
-// Базовая настройка
+// Basic setup
 import { ImageProcessorModule } from 'image-processor-lib';
 
 @Module({
@@ -290,14 +290,14 @@ import { ImageProcessorModule } from 'image-processor-lib';
 })
 export class AppModule {}
 
-// Обработка изображения
+// Image processing
 const result = await imagePipeline.processImage(
   file.buffer,
   file.originalname,
   file.mimetype
 );
 
-// Результат с DPR поддержкой:
+// Result with DPR support:
 // {
 //   "original": "/uploads/originals/uuid.jpg",
 //   "generated": {
@@ -307,6 +307,6 @@ const result = await imagePipeline.processImage(
 // }
 ```
 
-## Лицензия
+## License
 
 MIT
