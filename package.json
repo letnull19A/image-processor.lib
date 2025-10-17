@@ -1,5 +1,5 @@
 {
-  "name": "image-processor-lib",
+  "name": "image-processor.lib",
   "version": "1.0.0",
   "description": "A powerful NestJS library for image processing with modern formats (WebP, AVIF), DPR support, and flexible storage drivers",
   "main": "dist/index.js",
@@ -35,13 +35,13 @@
   ],
   "author": "Your Name <your.email@example.com>",
   "license": "MIT",
-  "homepage": "https://github.com/yourusername/image-processor-lib#readme",
+  "homepage": "https://github.com/letnull19A/image-processor.lib#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/image-processor-lib.git"
+    "url": "https://github.com/letnull19A/image-processor.lib.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/image-processor-lib/issues"
+    "url": "https://github.com/letnull19A/image-processor.lib/issues"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
